@@ -1,20 +1,43 @@
-import React, { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
+import React from 'react'
+import {
+    Button,
+    Checkbox,
+    Grid,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    makeStyles,
+    Paper,
+    Typography,
+} from '@material-ui/core';
+
+const useStyles = makeStyles(() => ({
+    checkbox: {
+        '&$checked': {
+            color: '#F5B369'
+        },
+    },
+    checked: {},
+    grid: {
+        paddingTop: '10vh'
+    },
+    list: {
+        width: '30vw'
+    }
+}))
 
 const Completed = ({ completed }) => {
+    const classes = useStyles()
+
     return (
-        <div>
-            <h4>Completed</h4>
-            {completed.map((todo: { completed: boolean; id: any; title: boolean | ReactChild | ReactFragment | ReactPortal }, i: Key) => {
-                return (
-                    <div key={i}>
-                        <input type="checkbox" checked={todo.completed} value="" id={`checkbox${todo.id}`} disabled />
-                        <label htmlFor={`checkbox${todo.id}`}>
-                            {todo.title}
-                        </label>
-                    </div>
-                )
-            })}
-        </div>
+        <Grid container direction="column" justifyContent="center" alignItems="center" className={classes.grid}>
+            <Paper elevation={3}>
+                <List className={classes.list}>
+                    {completed.map((todo, id) => <ListItem key={id}>{todo.title}</ListItem>)}
+                </List>
+            </Paper>
+        </Grid>
     )
 }
 
