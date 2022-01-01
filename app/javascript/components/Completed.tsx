@@ -1,44 +1,53 @@
-import React from 'react'
-import {
-    Button,
-    Checkbox,
-    Grid,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    makeStyles,
-    Paper,
-    Typography,
-} from '@material-ui/core';
+import * as React from 'react'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Checkbox from '@mui/material/Checkbox'
+import Avatar from '@mui/material/Avatar'
 
-const useStyles = makeStyles(() => ({
-    checkbox: {
-        '&$checked': {
-            color: '#F5B369'
-        },
-    },
-    checked: {},
-    grid: {
-        paddingTop: '10vh'
-    },
-    list: {
-        width: '30vw'
+export default function CheckboxListSecondary({ completed }) {
+    const [checked, setChecked] = React.useState([1])
+
+    const handleToggle = (value: number) => () => {
+        const currentIndex = checked.indexOf(value)
+        const newChecked = [...checked]
+
+        if (currentIndex === -1) {
+            newChecked.push(value)
+        } else {
+            newChecked.splice(currentIndex, 1)
+        }
+
+        setChecked(newChecked)
     }
-}))
-
-const Completed = ({ completed }) => {
-    const classes = useStyles()
 
     return (
-        <Grid container direction="column" justifyContent="center" alignItems="center" className={classes.grid}>
-            <Paper elevation={3}>
-                <List className={classes.list}>
-                    {completed.map((todo, id) => <ListItem key={id}>{todo.title}</ListItem>)}
-                </List>
-            </Paper>
-        </Grid>
+        <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'Background.paper' }}>
+            {
+                completed.map((todo, id) => {
+                    const labelId = `checkbox-list-secondary-label-${id}`
+                    return (
+                        <ListItem
+                            key={id}
+                            secondaryAction={
+                                <Checkbox
+                                    edge="end"
+                                    // onChange={handleToggle(id)}
+                                    checked={todo.completed}
+                                    inputProps={{ 'aria-labelledby': labelId }}
+                                />
+                            }
+                            disablePadding
+                        >
+                            <ListItemButton>
+                                <ListItemText id={labelId} primary={todo.title} />
+                            </ListItemButton>
+                        </ListItem>
+                    )
+                })
+            }
+        </List>
     )
 }
-
-export default Completed

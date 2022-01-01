@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Completed from './Completed';
-import BasicList from './Test';
+import Pending from './Pending';
 
 const Home = () => {
-    const [todos, setTodos] = useState({ completed: [] });
+    const [todos, setTodos] = useState({ completed: [], uncompleted: [] });
     const [loading, setLoading] = useState(true);
     const [test, setTest] = useState(0)
 
@@ -25,11 +25,11 @@ const Home = () => {
     }, []);
 
     return (
-        // <div>
-        //     {loading ? <h1>wait</h1> : <Completed completed={todos.completed} />}
-        // </div>
         <div>
-            <BasicList />
+            <h1>Todo</h1>
+            <Pending pending={todos.uncompleted} />
+            <hr />
+            <Completed completed={todos.completed} />
         </div>
     )
 }
