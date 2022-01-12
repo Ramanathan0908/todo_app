@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextSnippetTwoTone } from '@mui/icons-material';
 
-const PendingItems = ({ todo, handleSubmit, labelId, id, handleDelete }) => {
+const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
     const [editing, setEditing] = React.useState(false)
     const [pendingTodo, setPendingTodo] = React.useState(todo)
 
@@ -44,7 +44,6 @@ const PendingItems = ({ todo, handleSubmit, labelId, id, handleDelete }) => {
 
     return (
         <ListItem
-            key={id}
             secondaryAction={
                 <IconButton edge="end" aria-label="comments" onClick={test}>
                     <DeleteIcon />
@@ -64,7 +63,6 @@ const PendingItems = ({ todo, handleSubmit, labelId, id, handleDelete }) => {
                 <ListItemText id={labelId} primary={todo.title} />
             </ListItemButton>
         </ListItem>
-
     )
 }
 
