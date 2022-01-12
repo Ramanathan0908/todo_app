@@ -1,53 +1,71 @@
 import * as React from 'react'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemText from '@mui/material/ListItemText'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Checkbox from '@mui/material/Checkbox'
-import Avatar from '@mui/material/Avatar'
+import { List, ListItem, ListItemButton, ListItemText, Checkbox } from '@mui/material'
+import PendingItems from './PendingItems'
 
-export default function CheckboxListSecondary({ completed }) {
-    const [checked, setChecked] = React.useState([1])
-
-    const handleToggle = (value: number) => () => {
-        const currentIndex = checked.indexOf(value)
-        const newChecked = [...checked]
-
-        if (currentIndex === -1) {
-            newChecked.push(value)
-        } else {
-            newChecked.splice(currentIndex, 1)
-        }
-
-        setChecked(newChecked)
+const Completed = ({ completed }) => {
+    const handleSubmit = (body) => {
+        const url = "/todos/update"
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+        console.log(body)
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "X-CSRF-Token": token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error("Network response was not ok")
+            })
+            .then(response => {
+                console.log(response)
+                window.location.reload()
+            })
+            .catch(() => console.log("Error"))
     }
 
+    const handleDelete = () => {
+        const url = "/todos/delete"
+        const token = document.querySelector('meta[name="csrf-token"]').content
+
+        fetch(url, {
+            method: "DELETE",
+            headers: {
+                "X-CSRF-Token": token,
+                "Content-Type": "application/json"
+            }
+            //body: JSON.stringify(body)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error("Network response was not ok")
+            })
+            .then(response => {
+                console.log(response)
+                window.location.reload()
+            })
+            .catch(() => console.log("Error"))
+    }
+
+
     return (
-        <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'Background.paper' }}>
+        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             {
-                completed.map((todo, id) => {
-                    const labelId = `checkbox-list-secondary-label-${id}`
+                completed.map((todo, i) => {
+                    const labelId = `checkbox-list-label-${i}`
                     return (
-                        <ListItem
-                            key={id}
-                            secondaryAction={
-                                <Checkbox
-                                    edge="end"
-                                    // onChange={handleToggle(id)}
-                                    checked={todo.completed}
-                                    inputProps={{ 'aria-labelledby': labelId }}
-                                />
-                            }
-                            disablePadding
-                        >
-                            <ListItemButton>
-                                <ListItemText id={labelId} primary={todo.title} />
-                            </ListItemButton>
-                        </ListItem>
+                        <PendingItems key={i} todo={todo} handleSubmit={handleSubmit} labelId={labelId} id={i} handleDelete={handleDelete} />
                     )
                 })
             }
         </List>
     )
 }
+
+export default Completed

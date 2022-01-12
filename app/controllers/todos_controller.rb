@@ -17,6 +17,21 @@ class TodosController < ApplicationController
     end
   end
 
+  def create
+    new_todo = Todo.create!(todo_params)
+    if new_todo
+      render json: { message: "Todo Item created successfully" }
+    else
+      render json: { message: "An error occured" }
+    end
+  end
+
+  def delete
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    render json: { message: "Deleted" }
+  end
+
   private
 
   def todo_params
