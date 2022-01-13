@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Box } from '@mui/material';
-import { createTheme, ThemeProvider, styled, Button, Stack } from '@mui/material';
+import { createTheme, ThemeProvider, styled, Button, Stack, Typography } from '@mui/material';
 import Completed from './Completed';
 import Pending from './Pending';
 import { TextField } from '@material-ui/core';
@@ -138,16 +138,17 @@ const Home = () => {
 
     return (
         <div style={{ backgroundColor: '#D7EAE9', minHeight: '100vh', height: '100%' }}>
-            {/* <ThemeProvider theme={lightTheme}> */}
             <Stack
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}
+                sx={{ paddingTop: '10vh' }}
             >
-                {/* <Paper elevation={4}> */}
+                <Typography variant="h5" gutterBottom component="div">
+                    Your Todos
+                </Typography>
                 <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
-                {/* </Paper> */}
                 <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
                 {
                     !addTodo && <Button variant='contained' onClick={showAddTodo}>Add Todo</Button>
@@ -156,13 +157,6 @@ const Home = () => {
                     addTodo && (
                         <Grid sx={{ width: '100%', maxWidth: 360 }} >
                             <form onSubmit={handleCreateSubmit}>
-                                {/* <div className="form-row">
-                                <div className="col-9">
-                                    <input type="text" className="form-control-plaintext mr-3" autoFocus placeholder="Todo Item" onChange={handleChange} />
-                                </div>
-                                <button type="submit" className="btn btn-primary col mr-2">Add</button>
-                                <button className="btn btn-outline-primary col" onClick={cancelAdd}>Cancel</button>
-                            </div> */}
                                 <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
                                     <TextField id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline fullWidth />
                                     <Stack direction="row" spacing={2}>
@@ -175,7 +169,6 @@ const Home = () => {
                     )
                 }
             </Stack>
-            {/* </ThemeProvider> */}
         </div >
     )
 }
