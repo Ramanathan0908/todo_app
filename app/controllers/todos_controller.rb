@@ -8,6 +8,11 @@ class TodosController < ApplicationController
     render json: { completed: completed, uncompleted: uncompleted }
   end
 
+  def all_tags
+    tags = Category.all
+    render json: { tags: tags }
+  end
+
   def update
     todo = Todo.find(params[:id])
     if todo.update(todo_params)

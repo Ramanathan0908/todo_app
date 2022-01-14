@@ -6,14 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-5.times do |index|
-    Todo.create!({title: "Todo #{index + 1}", completed: false, tag: "Tasks"})
+# 5.times do |index|
+#     Todo.create!({title: "Todo #{index + 1}", completed: false, tag: "Tasks"})
+# end
+
+# puts "5 uncompleted todos created"
+
+# 5.times do |index|
+#     Todo.create!({title: "Todo #{index + 1}", completed: true, tag: "Tasks"})
+# end
+
+3.times do |index|
+    Category.create!({tag: "work type #{index + 1}", color: "color #{index +1}"})
 end
 
-puts "5 uncompleted todos created"
-
-5.times do |index|
-    Todo.create!({title: "Todo #{index + 1}", completed: true, tag: "Tasks"})
-end
-
-puts "5 completed todos created"
+# puts "5 completed todos created"

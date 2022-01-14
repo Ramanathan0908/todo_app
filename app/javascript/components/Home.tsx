@@ -20,6 +20,7 @@ const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 const Home = () => {
     const [todos, setTodos] = useState({ completed: [], uncompleted: [] });
+    const [tag, setTag] = useState({ tags: [] })
     const [loading, setLoading] = useState(true);
     const [addTodo, setAddTodo] = useState(false)
     const [todo, setTodo] = useState('')
@@ -32,10 +33,20 @@ const Home = () => {
         return data
     }
 
+    const fetchTags = async () => {
+        const url = "/todos/all_tags"
+        const res = await fetch(url)
+        const data = await res.json()
+
+        return data
+    }
+
     useEffect(() => {
         const getTodos = async () => {
             const todosFromServer = await fetchTodos()
             setTodos(todosFromServer)
+            const tagsFromServer = await fetchTags()
+            setTag(tagsFromServer)
             setLoading(false)
         }
         getTodos()
@@ -171,6 +182,13 @@ const Home = () => {
                     )
                 }
             </Stack>
+            {
+                tag.tags.map((tag1, i) => {
+                    return (
+                        <p key={i}>{tag1.color}</p>
+                    )
+                })
+            }
         </div >
     )
 }
