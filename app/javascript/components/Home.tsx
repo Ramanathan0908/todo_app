@@ -160,7 +160,7 @@ const Home = () => {
                 <Typography variant="h5" gutterBottom component="div">
                     Your Todos
                 </Typography>
-                <BasicTabs completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
+                <BasicTabs tags={tag.tags} />
                 <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
                 <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
                 {
@@ -182,13 +182,6 @@ const Home = () => {
                     )
                 }
             </Stack>
-            {
-                tag.tags.map((tag1, i) => {
-                    return (
-                        <p key={i}>{tag1.color}</p>
-                    )
-                })
-            }
         </div >
     )
 }
