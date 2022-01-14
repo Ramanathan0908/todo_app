@@ -7,13 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do |index|
-    Todo.create!({title: "Todo #{index + 1}", completed: false})
+    Todo.create!({title: "Todo #{index + 1}", completed: false, tag: "Tasks"})
 end
 
 puts "5 uncompleted todos created"
 
 5.times do |index|
-    Todo.create!({title: "Todo #{index + 1}", completed: true})
+    Todo.create!({title: "Todo #{index + 1}", completed: true, tag: "Tasks"})
 end
 
 puts "5 completed todos created"

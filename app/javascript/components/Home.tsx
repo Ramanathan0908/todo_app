@@ -3,6 +3,7 @@ import { Grid, Paper, Box } from '@mui/material';
 import { createTheme, ThemeProvider, styled, Button, Stack, Typography } from '@mui/material';
 import Completed from './Completed';
 import Pending from './Pending';
+import BasicTabs from './Tabs';
 import { TextField } from '@material-ui/core';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -143,11 +144,12 @@ const Home = () => {
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}
-                sx={{ paddingTop: '10vh' }}
+                sx={{ paddingTop: '5vh', paddingBottom: '5vh' }}
             >
                 <Typography variant="h5" gutterBottom component="div">
                     Your Todos
                 </Typography>
+                <BasicTabs completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
                 <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
                 <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
                 {

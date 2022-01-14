@@ -60,7 +60,7 @@ const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
                         inputProps={{ 'aria-labelledby': labelId }}
                     />
                 </ListItemIcon>
-                <ListItemText id={labelId} primary={todo.title} />
+                <ListItemText id={labelId} primary={todo.title} secondary={todo.tag} />
             </ListItemButton>
         </ListItem>
     )
