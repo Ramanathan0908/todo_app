@@ -55,7 +55,7 @@ export default function BasicTabs({ tags }) {
                     {
                         tags.map((tag, i) => {
                             return (
-                                <Tab label={tag.tag} {...a11yProps(i)} />
+                                <Tab key={i} label={tag.tag} {...a11yProps(i)} />
                             )
                         })
                     }

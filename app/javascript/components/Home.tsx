@@ -5,6 +5,7 @@ import Completed from './Completed';
 import Pending from './Pending';
 import BasicTabs from './Tabs';
 import { TextField } from '@material-ui/core';
+import { InputLabel, MenuItem, Select, SelectChangeEvent, FormControl } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -24,6 +25,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [addTodo, setAddTodo] = useState(false)
     const [todo, setTodo] = useState('')
+    const [inputTag, setInputTag] = useState('')
 
     const fetchTodos = async () => {
         const url = "/todos/all_todos"
@@ -64,6 +66,10 @@ const Home = () => {
         setTodo(event.target.value)
     }
 
+    const handleTagInput = (event) => {
+        setInputTag(event.target.value)
+    }
+
     const handleCreateSubmit = (event) => {
         event.preventDefault()
 
@@ -71,7 +77,8 @@ const Home = () => {
 
         const todoBody = {
             title: todo,
-            completed: false
+            completed: false,
+            tag: inputTag
         }
 
         const url = "/todos/create"
@@ -101,7 +108,6 @@ const Home = () => {
     const handleUpdateSubmit = (body) => {
         const url = "/todos/update"
         const token = document.querySelector('meta[name="csrf-token"]').content;
-        console.log(body)
         fetch(url, {
             method: "PUT",
             headers: {
@@ -171,7 +177,25 @@ const Home = () => {
                         <Grid sx={{ width: '100%', maxWidth: 360 }} >
                             <form onSubmit={handleCreateSubmit}>
                                 <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
-                                    <TextField id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline fullWidth />
+                                    <TextField label="Task" id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline fullWidth />
+                                    <FormControl fullWidth>
+                                        <InputLabel id="simple-select-label">Tag</InputLabel>
+                                        <Select
+                                            value={inputTag}
+                                            label="Tag"
+                                            onChange={handleTagInput}
+                                            fullWidth
+                                            labelId="simple-select-label"
+                                        >
+                                            {
+                                                tag.tags.map((cat, i) => {
+                                                    return (
+                                                        <MenuItem key={i} value={cat.tag}>{cat.tag}</MenuItem>
+                                                    )
+                                                })
+                                            }
+                                        </Select>
+                                    </FormControl>
                                     <Stack direction="row" spacing={2}>
                                         <Button variant='outlined' type='submit'>Add</Button>
                                         <Button variant='outlined' onClick={cancelAdd}>Cancel</Button>
