@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Dispatcher from './Tasks'
+import AddTask from './AddTask'
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -35,11 +36,10 @@ function a11yProps(index: number) {
     };
 }
 
-export default function BasicTabs({ tags, displayTag, setDisplayTag }) {
-    const [value, setValue] = React.useState(displayTag);
+export default function BasicTabs({ tags }) {
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setDisplayTag(newValue);
         setValue(newValue);
     };
 
@@ -65,6 +65,7 @@ export default function BasicTabs({ tags, displayTag, setDisplayTag }) {
                     )
                 })
             }
+            <AddTask tags={tags} />
         </Box>
     );
 }

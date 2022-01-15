@@ -5,6 +5,7 @@ import Completed from './Completed'
 
 const Dispatcher = ({ tag }) => {
     const [todos, setTodos] = React.useState({ completed: [], uncompleted: [] })
+
     const fetchTodos = async () => {
         const url = (tag === "All Tasks") ? "/todos/all_todos" : `/todos/tag/${tag}`
         const res = await fetch(url)
