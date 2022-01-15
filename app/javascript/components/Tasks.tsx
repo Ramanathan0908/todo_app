@@ -1,8 +1,5 @@
 import * as React from 'react'
-import { List, ListItem, ListItemButton, ListItemText, Checkbox, Stack } from '@mui/material'
-import { Paper } from '@material-ui/core'
-import { ListSubheader, ListItemIcon, Collapse } from '@mui/material'
-import { ExpandMore, ExpandLess, StarBorder } from '@mui/icons-material'
+import { ListItem, Stack } from '@mui/material'
 import Pending from './Pending'
 import Completed from './Completed'
 

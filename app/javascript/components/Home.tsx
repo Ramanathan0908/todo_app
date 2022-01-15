@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Paper, Box } from '@mui/material';
 import { createTheme, ThemeProvider, styled, Button, Stack, Typography } from '@mui/material';
-import Completed from './Completed';
-import Pending from './Pending';
 import BasicTabs from './Tabs';
 import { TextField } from '@material-ui/core';
 import { InputLabel, MenuItem, Select, SelectChangeEvent, FormControl } from '@mui/material';
@@ -26,7 +24,6 @@ const Home = () => {
         const getTodos = async () => {
             const tagsFromServer = await fetchTags()
             setTag(tagsFromServer)
-            setLoading(false)
         }
         getTodos()
     }, []);

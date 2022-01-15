@@ -7,7 +7,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { TextSnippetTwoTone } from '@mui/icons-material';
 
 const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
     const [editing, setEditing] = React.useState(false)

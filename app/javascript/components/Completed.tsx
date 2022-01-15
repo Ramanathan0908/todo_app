@@ -2,7 +2,7 @@ import * as React from 'react'
 import { List, ListItem, ListItemButton, ListItemText, Checkbox } from '@mui/material'
 import PendingItems from './IndividualItems'
 import { Paper } from '@material-ui/core'
-import { ListSubheader, ListItemIcon, Collapse } from '@mui/material'
+import { Collapse } from '@mui/material'
 import { ExpandMore, ExpandLess, StarBorder } from '@mui/icons-material'
 
 const Completed = ({ completed, handleSubmit, handleDelete }) => {
