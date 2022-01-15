@@ -23,7 +23,23 @@ const Dispatcher = ({ tag }) => {
         getTodos()
     }, [])
 
+    const newUpdate = (body, flag) => {
+        if (flag == 'U') {
+            const addedList = body.completed ? [...todos.completed, body] : [...todos.uncompleted, body]
+            const removedList = body.completed ? todos.uncompleted.filter(todo => todo.id != body.id) : todos.completed.filter(todo => todo.id != body.id)
+            const combined = body.completed ? { completed: addedList, uncompleted: removedList } : { completed: removedList, uncompleted: addedList }
+            console.log(combined)
+            setTodos(combined)
+        } else {
+            const removedList = body.completed ? todos.completed.filter(todo => todo.id != body.id) : todos.uncompleted.filter(todo => todo.id != body.id)
+            const combined = body.completed ? { completed: removedList, uncompleted: todos.uncompleted } : { completed: todos.completed, uncompleted: removedList }
+            setTodos(combined)
+        }
+    }
+
     const handleUpdateSubmit = (body) => {
+        newUpdate(body, 'U')
+
         const url = "/todos/update"
         const token = document.querySelector('meta[name="csrf-token"]').content;
         fetch(url, {
@@ -42,12 +58,14 @@ const Dispatcher = ({ tag }) => {
             })
             .then(response => {
                 console.log(response)
-                window.location.reload()
+                //window.location.reload()
             })
             .catch(() => console.log("Error"))
     }
 
     const handleDelete = (body) => {
+        newUpdate(body, 'D')
+
         const url = "/todos/delete"
         const token = document.querySelector('meta[name="csrf-token"]').content
 
@@ -67,7 +85,7 @@ const Dispatcher = ({ tag }) => {
             })
             .then(response => {
                 console.log(response)
-                window.location.reload()
+                //window.location.reload()
             })
             .catch(() => console.log("Error"))
     }

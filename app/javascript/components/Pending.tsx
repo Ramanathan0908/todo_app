@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { List, ListItem, ListItemButton, ListItemText, Checkbox, Paper } from '@mui/material'
-import PendingItems from './PendingItems'
+import PendingItems from './IndividualItems'
 
 const Pending = ({ pending, handleSubmit, handleDelete }) => {
 

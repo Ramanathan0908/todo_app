@@ -8,20 +8,11 @@ import { TextField } from '@material-ui/core';
 import { InputLabel, MenuItem, Select, SelectChangeEvent, FormControl } from '@mui/material';
 
 const Home = () => {
-    const [todos, setTodos] = useState({ completed: [], uncompleted: [] });
     const [tag, setTag] = useState({ tags: [] })
-    const [loading, setLoading] = useState(true);
     const [addTodo, setAddTodo] = useState(false)
     const [todo, setTodo] = useState('')
     const [inputTag, setInputTag] = useState('')
-
-    const fetchTodos = async () => {
-        const url = "/todos/all_todos"
-        const res = await fetch(url)
-        const data = await res.json()
-
-        return data
-    }
+    const [displayTag, setDisplayTag] = useState(0)
 
     const fetchTags = async () => {
         const url = "/todos/all_tags"
@@ -33,8 +24,6 @@ const Home = () => {
 
     useEffect(() => {
         const getTodos = async () => {
-            const todosFromServer = await fetchTodos()
-            setTodos(todosFromServer)
             const tagsFromServer = await fetchTags()
             setTag(tagsFromServer)
             setLoading(false)
@@ -93,55 +82,6 @@ const Home = () => {
             .catch(() => console.log('Error'))
     }
 
-    const handleUpdateSubmit = (body) => {
-        const url = "/todos/update"
-        const token = document.querySelector('meta[name="csrf-token"]').content;
-        fetch(url, {
-            method: "PUT",
-            headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("Network response was not ok")
-            })
-            .then(response => {
-                console.log(response)
-                window.location.reload()
-            })
-            .catch(() => console.log("Error"))
-    }
-
-    const handleDelete = (body) => {
-        const url = "/todos/delete"
-        const token = document.querySelector('meta[name="csrf-token"]').content
-
-        fetch(url, {
-            method: "DELETE",
-            headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error("Network response was not ok")
-            })
-            .then(response => {
-                console.log(response)
-                window.location.reload()
-            })
-            .catch(() => console.log("Error"))
-    }
-
     return (
         <div style={{ backgroundColor: '#D7EAE9', minHeight: '100vh', height: '100%' }}>
             <Stack
@@ -154,9 +94,7 @@ const Home = () => {
                 <Typography variant="h5" gutterBottom component="div">
                     Your Todos
                 </Typography>
-                <BasicTabs tags={tag.tags} />
-                {/* <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
-                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} /> */}
+                <BasicTabs tags={tag.tags} displayTag={displayTag} setDisplayTag={setDisplayTag} />
                 {
                     !addTodo && <Button variant='contained' onClick={showAddTodo}>Add Todo</Button>
                 }

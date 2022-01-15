@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Completed from './Completed'
-import Dispatcher from './nPending'
+import Dispatcher from './Tasks'
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -24,9 +24,6 @@ function TabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                // <Box sx={{ p: 3 }}>
-                //     <Typography>{children}</Typography>
-                // </Box>
                 <Box>{children}</Box>
             )}
         </div>
@@ -40,10 +37,11 @@ function a11yProps(index: number) {
     };
 }
 
-export default function BasicTabs({ tags }) {
-    const [value, setValue] = React.useState(0);
+export default function BasicTabs({ tags, displayTag, setDisplayTag }) {
+    const [value, setValue] = React.useState(displayTag);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setDisplayTag(newValue);
         setValue(newValue);
     };
 
@@ -51,9 +49,6 @@ export default function BasicTabs({ tags }) {
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                    {/* <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} /> */}
                     {
                         tags.map((tag, i) => {
                             return (
