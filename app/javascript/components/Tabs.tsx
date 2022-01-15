@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Completed from './Completed'
+import Dispatcher from './nPending'
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -23,9 +24,10 @@ function TabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
+                // <Box sx={{ p: 3 }}>
+                //     <Typography>{children}</Typography>
+                // </Box>
+                <Box>{children}</Box>
             )}
         </div>
     );
@@ -55,22 +57,21 @@ export default function BasicTabs({ tags }) {
                     {
                         tags.map((tag, i) => {
                             return (
-                                <Tab key={i} label={tag.tag} {...a11yProps(i)} />
+                                <Tab key={i} label={tag.tag} {...a11yProps(i)} value={i} />
                             )
                         })
                     }
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-                {/* <Completed completed={completed} handleDelete={handleDelete} handleSubmit={handleSubmit} /> */}
-                {/* Item one */}
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                {/* Item two */}
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                {/* Item three */}
-            </TabPanel>
+            {
+                tags.map((tag, i) => {
+                    return (
+                        <TabPanel value={value} index={i} key={i}>
+                            <Dispatcher tag={tag.tag} />
+                        </TabPanel>
+                    )
+                })
+            }
         </Box>
     );
 }

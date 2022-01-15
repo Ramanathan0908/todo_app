@@ -155,8 +155,8 @@ const Home = () => {
                     Your Todos
                 </Typography>
                 <BasicTabs tags={tag.tags} />
-                <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
-                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
+                {/* <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
+                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} /> */}
                 {
                     !addTodo && <Button variant='contained' onClick={showAddTodo}>Add Todo</Button>
                 }

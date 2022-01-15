@@ -13,6 +13,12 @@ class TodosController < ApplicationController
     render json: { tags: tags }
   end
 
+  def tag
+    completed = Todo.where(tag: params[:tag]).where(completed: true)
+    uncompleted = Todo.where(tag: params[:tag]).where(completed: false)
+    render json: { completed: completed, uncompleted: uncompleted }
+  end
+
   def update
     todo = Todo.find(params[:id])
     if todo.update(todo_params)
