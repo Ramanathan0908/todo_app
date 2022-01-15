@@ -7,18 +7,6 @@ import BasicTabs from './Tabs';
 import { TextField } from '@material-ui/core';
 import { InputLabel, MenuItem, Select, SelectChangeEvent, FormControl } from '@mui/material';
 
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    textAlign: 'center',
-    justifyContent: 'center',
-    color: theme.palette.text.secondary,
-    height: 60,
-    lineHeight: '60px',
-}));
-
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
-const lightTheme = createTheme({ palette: { mode: 'light' } });
-
 const Home = () => {
     const [todos, setTodos] = useState({ completed: [], uncompleted: [] });
     const [tag, setTag] = useState({ tags: [] })
