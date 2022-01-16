@@ -9,16 +9,26 @@ const AddTask = ({ tags }) => {
     const [addTodo, setAddTodo] = useState(false)
     const [todo, setTodo] = useState('')
     const [inputTag, setInputTag] = useState('')
+    const [customTag, setCustomTag] = useState(false)
 
     const showAddTodo = () => setAddTodo(true)
-    const cancelAdd = () => setAddTodo(false)
+    const cancelAdd = () => {
+        setCustomTag(false)
+        setInputTag('')
+        setAddTodo(false)
+    }
 
     const handleChange = (event) => {
         setTodo(event.target.value)
     }
 
     const handleTagInput = (event) => {
-        setInputTag(event.target.value)
+        if (event.target.value == "Custom-tag") {
+            setCustomTag(true)
+        } else {
+            //setCustomTag(false)
+            setInputTag(event.target.value)
+        }
     }
 
     const handleCreateSubmit = (event) => {
@@ -72,24 +82,32 @@ const AddTask = ({ tags }) => {
                         <form onSubmit={handleCreateSubmit}>
                             <Stack direction="column" spacing={2} justifyContent="center" alignItems="center">
                                 <TextField label="Task" id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline fullWidth />
-                                <FormControl fullWidth>
-                                    <InputLabel id="simple-select-label">Tag</InputLabel>
-                                    <Select
-                                        value={inputTag}
-                                        label="Tag"
-                                        onChange={handleTagInput}
-                                        fullWidth
-                                        labelId="simple-select-label"
-                                    >
-                                        {
-                                            tags.map((cat, i) => {
-                                                return (
-                                                    <MenuItem key={i} value={cat.tag}>{cat.tag}</MenuItem>
-                                                )
-                                            })
-                                        }
-                                    </Select>
-                                </FormControl>
+                                {
+                                    customTag && <TextField label="Tag" id='outlined-basic' autoFocus onChange={handleTagInput} variant="outlined" fullWidth />
+                                }
+                                {
+                                    !customTag && (
+                                        <FormControl fullWidth>
+                                            <InputLabel id="simple-select-label">Tag</InputLabel>
+                                            <Select
+                                                value={inputTag}
+                                                label="Tag"
+                                                onChange={handleTagInput}
+                                                fullWidth
+                                                labelId="simple-select-label"
+                                            >
+                                                {
+                                                    tags.map((cat, i) => {
+                                                        return (
+                                                            <MenuItem key={i} value={cat.tag}>{cat.tag}</MenuItem>
+                                                        )
+                                                    })
+                                                }
+                                                <MenuItem key={tags.length} value="Custom-tag">Create New Tag</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    )
+                                }
                                 <Stack direction="row" spacing={2}>
                                     <Button variant='outlined' type='submit'>Add</Button>
                                     <Button variant='outlined' onClick={cancelAdd}>Cancel</Button>
