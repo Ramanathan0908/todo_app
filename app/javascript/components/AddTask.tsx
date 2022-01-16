@@ -31,8 +31,44 @@ const AddTask = ({ tags }) => {
         }
     }
 
+    const handleCreateTag = () => {
+        if (inputTag === '') return
+
+        const tagBody = {
+            tag: inputTag
+        }
+
+        const url = "/todos/tag/create"
+        const token = document.querySelector('meta[name="csrf-token"]').content
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "X-CSRF-Token": token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(tagBody)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error("Network response was not okay")
+            })
+            .then(response => {
+                console.log(response)
+                //window.location.reload()
+            })
+            .catch(() => console.log('Error'))
+    }
+
     const handleCreateSubmit = (event) => {
         event.preventDefault()
+
+        if (customTag) {
+            console.log("test")
+            handleCreateTag()
+        }
 
         if (todo === '') return
 
@@ -61,7 +97,7 @@ const AddTask = ({ tags }) => {
             })
             .then(response => {
                 console.log(response)
-                window.location.reload()
+                //window.location.reload()
             })
             .catch(() => console.log('Error'))
     }

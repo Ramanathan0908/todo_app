@@ -19,6 +19,15 @@ class TodosController < ApplicationController
     render json: { completed: completed, uncompleted: uncompleted }
   end
 
+  def createTag
+    new_tag = Category.create!(tag_params)
+    if new_tag
+      render json: { message: "Tag created successfully" }
+    else
+      render json: { message: "An error occured" }
+    end
+  end
+
   def update
     todo = Todo.find(params[:id])
     if todo.update(todo_params)
@@ -47,5 +56,9 @@ class TodosController < ApplicationController
 
   def todo_params
     params.require(:todo).permit(:id, :title, :completed, :tag, :created_at, :updated_at)
+  end
+
+  def tag_params
+    params.permit(:tag)
   end
 end

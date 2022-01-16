@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react'
+import { useState, useEffect } from 'react';
 import { Grid, Paper, Box } from '@mui/material';
 import { createTheme, ThemeProvider, styled, Button, Stack, Typography } from '@mui/material';
 import BasicTabs from './Tabs';
