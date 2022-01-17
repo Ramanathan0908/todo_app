@@ -7,13 +7,15 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { TextField } from '@mui/material';
+import AddTask from './AddTask';
 
 const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
     const [editing, setEditing] = React.useState(false)
     const [pendingTodo, setPendingTodo] = React.useState(todo)
 
     const handleClick = () => {
-        setEditing(true)
+        setEditing(!editing)
     }
 
     const test = () => {
@@ -42,26 +44,39 @@ const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
     }
 
     return (
-        <ListItem
-            secondaryAction={
-                <IconButton edge="end" aria-label="comments" onClick={test}>
-                    <DeleteIcon />
-                </IconButton>
+        <>
+            <ListItem
+                secondaryAction={
+                    <IconButton edge="end" aria-label="comments" onClick={test}>
+                        <DeleteIcon />
+                    </IconButton>
+                }
+                disablePadding
+            >
+                <ListItemButton role={undefined} onDoubleClick={handleClick} dense>
+                    <ListItemIcon>
+                        <Checkbox
+                            edge="start"
+                            checked={todo.completed}
+                            disableRipple
+                            inputProps={{ 'aria-labelledby': labelId }}
+                            onChange={handleCompletedChange}
+                        />
+                    </ListItemIcon>
+                    <ListItemText id={labelId} primary={todo.title} secondary={todo.tag} />
+                </ListItemButton>
+            </ListItem>
+            {
+                editing && (
+                    <ListItem>
+                        <ListItemIcon>
+                            {/* <Checkbox /> */}
+                        </ListItemIcon>
+                        <AddTask tags={["one", "two"]} />
+                    </ListItem>
+                )
             }
-            disablePadding
-        >
-            <ListItemButton role={undefined} onClick={handleCompletedChange} dense>
-                <ListItemIcon>
-                    <Checkbox
-                        edge="start"
-                        checked={todo.completed}
-                        disableRipple
-                        inputProps={{ 'aria-labelledby': labelId }}
-                    />
-                </ListItemIcon>
-                <ListItemText id={labelId} primary={todo.title} secondary={todo.tag} />
-            </ListItemButton>
-        </ListItem>
+        </>
     )
 }
 
