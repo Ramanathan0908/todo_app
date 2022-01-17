@@ -66,7 +66,6 @@ const AddTask = ({ tags }) => {
         event.preventDefault()
 
         if (customTag) {
-            console.log("test")
             handleCreateTag()
         }
 
