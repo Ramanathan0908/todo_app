@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Dispatcher from './Tasks'
 import AddTask from './AddTask'
+import { Button } from '@mui/material'
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -60,7 +61,7 @@ export default function BasicTabs({ tags }) {
                 tags.map((tag, i) => {
                     return (
                         <TabPanel value={value} index={i} key={i}>
-                            <Dispatcher tag={tag.tag} allTags={tags} />
+                            <Dispatcher tag={tag} allTags={tags} />
                         </TabPanel>
                     )
                 })

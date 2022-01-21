@@ -28,6 +28,12 @@ class TodosController < ApplicationController
     end
   end
 
+  def deleteTag
+    @category = Category.find(params[:id])
+    @category.destroy
+    render json: { message: "Deleted" }
+  end
+
   def update
     todo = Todo.find(params[:id])
     if todo.update(todo_params)

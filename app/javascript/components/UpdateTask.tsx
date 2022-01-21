@@ -7,15 +7,15 @@ import {
 } from '@mui/material'
 
 const UpdateTask = ({ task, allTags }) => {
-    const [task1, setTask1] = useState(task)
-    const [todo, setTodo] = useState(task.title)
-    const [tag, setTag] = useState(task.tag)
-    const [completion, setCompletion] = useState(task.completed)
+    const [todo, setTodo] = useState(task)
     const [inputTag, setInputTag] = useState('')
     const [customTag, setCustomTag] = useState(false)
 
     const handleChange = (event) => {
-        setTodo(event.target.value)
+        setTodo({
+            ...todo,
+            title: event.target.value
+        })
     }
 
     const handleTagInput = (event) => {
@@ -24,6 +24,10 @@ const UpdateTask = ({ task, allTags }) => {
         } else {
             //setCustomTag(false)
             setInputTag(event.target.value)
+            setTodo({
+                ...todo,
+                tag: event.target.value
+            })
         }
     }
 
@@ -61,11 +65,15 @@ const UpdateTask = ({ task, allTags }) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
+        if (customTag) {
+            handleCreateTag()
+        }
+
         const todoBody = {
-            ...task1,
-            title: todo,
-            completed: completion,
-            tag: tag
+            ...todo,
+            title: todo.title,
+            completed: todo.completion,
+            tag: inputTag
         }
 
         const url = "/todos/update"
@@ -92,7 +100,7 @@ const UpdateTask = ({ task, allTags }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} onKeyDown={() => console.log("key2")}>
+        <form onSubmit={handleSubmit} >
             < Stack
                 direction="column"
                 justifyContent="center"
@@ -102,11 +110,11 @@ const UpdateTask = ({ task, allTags }) => {
             >
                 <TextField sx={{ minWidth: 220 }} label="Task" id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline />
                 {
-                    customTag && <TextField label="Tag" id='outlined-basic' autoFocus onChange={handleTagInput} variant="outlined" fullWidth />
+                    customTag && <TextField label="Tag" id='outlined-basic' autoFocus onChange={handleTagInput} variant="outlined" sx={{ minWidth: 220 }} />
                 }
                 {
                     !customTag && (
-                        <FormControl sx={{ minWidth: 220 }} onKeyDown={() => console.log("key down")} >
+                        <FormControl sx={{ minWidth: 220 }} >
                             <InputLabel id="simple-select-label">Tag</InputLabel>
                             <Select
                                 value={inputTag}

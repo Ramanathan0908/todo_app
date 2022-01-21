@@ -1,13 +1,14 @@
 import * as React from 'react'
-import { ListItem, Stack } from '@mui/material'
+import { ListItem, Stack, Button } from '@mui/material'
 import Pending from './Pending'
 import Completed from './Completed'
+import AlertDialog from './DeleteTag'
 
 const Dispatcher = ({ tag, allTags }) => {
     const [todos, setTodos] = React.useState({ completed: [], uncompleted: [] })
 
     const fetchTodos = async () => {
-        const url = (tag === "All Tasks") ? "/todos/all_todos" : `/todos/tag/${tag}`
+        const url = (tag.tag === "All Tasks") ? "/todos/all_todos" : `/todos/tag/${tag.tag}`
         const res = await fetch(url)
         const data = await res.json()
         return data
@@ -98,6 +99,7 @@ const Dispatcher = ({ tag, allTags }) => {
             >
                 <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} all_tags={allTags} />
                 <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} all_tags={allTags} />
+                <AlertDialog tag={tag} />
             </Stack>
 
         </>
