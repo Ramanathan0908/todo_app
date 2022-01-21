@@ -60,7 +60,7 @@ export default function BasicTabs({ tags }) {
                 tags.map((tag, i) => {
                     return (
                         <TabPanel value={value} index={i} key={i}>
-                            <Dispatcher tag={tag.tag} />
+                            <Dispatcher tag={tag.tag} allTags={tags} />
                         </TabPanel>
                     )
                 })

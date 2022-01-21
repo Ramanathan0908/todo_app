@@ -8,9 +8,9 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { TextField } from '@mui/material';
-import AddTask from './AddTask';
+import UpdateTask from './UpdateTask';
 
-const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
+const PendingItems = ({ todo, handleSubmit, labelId, handleDelete, allTags }) => {
     const [editing, setEditing] = React.useState(false)
     const [pendingTodo, setPendingTodo] = React.useState(todo)
 
@@ -68,12 +68,7 @@ const PendingItems = ({ todo, handleSubmit, labelId, handleDelete }) => {
             </ListItem>
             {
                 editing && (
-                    <ListItem>
-                        <ListItemIcon>
-                            {/* <Checkbox /> */}
-                        </ListItemIcon>
-                        <AddTask tags={["one", "two"]} />
-                    </ListItem>
+                    <UpdateTask task={todo} allTags={allTags} />
                 )
             }
         </>

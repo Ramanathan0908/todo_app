@@ -3,7 +3,7 @@ import { ListItem, Stack } from '@mui/material'
 import Pending from './Pending'
 import Completed from './Completed'
 
-const Dispatcher = ({ tag }) => {
+const Dispatcher = ({ tag, allTags }) => {
     const [todos, setTodos] = React.useState({ completed: [], uncompleted: [] })
 
     const fetchTodos = async () => {
@@ -96,8 +96,8 @@ const Dispatcher = ({ tag }) => {
                 alignItems="center"
                 spacing={2}
             >
-                <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
-                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} />
+                <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} all_tags={allTags} />
+                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} all_tags={allTags} />
             </Stack>
 
         </>
