@@ -10,7 +10,7 @@ class TodosController < ApplicationController
 
   def all_tags
     tags = Category.all
-    render json: { tags: tags }
+    render json: { categories: tags }
   end
 
   def tag

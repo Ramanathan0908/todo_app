@@ -1,10 +1,7 @@
 import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import Dispatcher from './Tasks'
+import Tasks from './Tasks'
 import AddTask from './AddTask'
-import { Button } from '@mui/material'
+import { Tabs, Tab, Box, Button } from '@mui/material'
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -37,7 +34,7 @@ function a11yProps(index: number) {
     };
 }
 
-export default function BasicTabs({ tags }) {
+function CategoryTabs({ categories }) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -49,24 +46,26 @@ export default function BasicTabs({ tags }) {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     {
-                        tags.map((tag, i) => {
+                        categories.map((category, i) => {
                             return (
-                                <Tab key={i} label={tag.tag} {...a11yProps(i)} value={i} />
+                                <Tab key={i} label={category.tag} {...a11yProps(i)} value={i} />
                             )
                         })
                     }
                 </Tabs>
             </Box>
             {
-                tags.map((tag, i) => {
+                categories.map((category, i) => {
                     return (
                         <TabPanel value={value} index={i} key={i}>
-                            <Dispatcher tag={tag} allTags={tags} />
+                            <Tasks category={category} allCategories={categories} />
                         </TabPanel>
                     )
                 })
             }
-            <AddTask tags={tags} />
+            <AddTask tags={categories} />
         </Box>
     );
 }
+
+export default CategoryTabs

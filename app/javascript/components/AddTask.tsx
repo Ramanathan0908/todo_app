@@ -96,7 +96,7 @@ const AddTask = ({ tags }) => {
             })
             .then(response => {
                 console.log(response)
-                //window.location.reload()
+                window.location.reload()
             })
             .catch(() => console.log('Error'))
     }

@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { List, ListItem, ListItemButton, ListItemText, Checkbox } from '@mui/material'
-import PendingItems from './IndividualItems'
-import { Paper } from '@material-ui/core'
-import { Collapse } from '@mui/material'
-import { ExpandMore, ExpandLess, StarBorder } from '@mui/icons-material'
+import IndividualItems from './IndividualItems'
+import { List, ListItemButton, ListItemText, Collapse, Paper } from '@mui/material'
+import { ExpandMore, ExpandLess } from '@mui/icons-material'
 
-const Completed = ({ completed, handleSubmit, handleDelete, all_tags }) => {
+const Completed = ({ completed, handleSubmit, handleDelete, allCategories }) => {
     const [open, setOpen] = React.useState(false)
 
     const handleClick = () => {
@@ -27,7 +25,7 @@ const Completed = ({ completed, handleSubmit, handleDelete, all_tags }) => {
                         completed.map((todo, i) => {
                             const labelId = `checkbox-list-label-${i}`
                             return (
-                                <PendingItems key={i} todo={todo} handleSubmit={handleSubmit} labelId={labelId} handleDelete={handleDelete} allTags={all_tags} />
+                                <IndividualItems key={i} todo={todo} handleSubmit={handleSubmit} labelId={labelId} handleDelete={handleDelete} allCategories={allCategories} />
                             )
                         })
                     }

@@ -4,11 +4,11 @@ import Pending from './Pending'
 import Completed from './Completed'
 import AlertDialog from './DeleteTag'
 
-const Dispatcher = ({ tag, allTags }) => {
+const Tasks = ({ category, allCategories }) => {
     const [todos, setTodos] = React.useState({ completed: [], uncompleted: [] })
 
     const fetchTodos = async () => {
-        const url = (tag.tag === "All Tasks") ? "/todos/all_todos" : `/todos/tag/${tag.tag}`
+        const url = (category.tag === "All Tasks") ? "/todos/all_todos" : `/todos/tag/${category.tag}`
         const res = await fetch(url)
         const data = await res.json()
         return data
@@ -97,14 +97,13 @@ const Dispatcher = ({ tag, allTags }) => {
                 alignItems="center"
                 spacing={2}
             >
-                <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} all_tags={allTags} />
-                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} all_tags={allTags} />
-                <AlertDialog tag={tag} />
+                <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} allCategories={allCategories} />
+                <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} allCategories={allCategories} />
+                <AlertDialog category={category} />
             </Stack>
-
         </>
     )
 
 }
 
-export default Dispatcher
+export default Tasks

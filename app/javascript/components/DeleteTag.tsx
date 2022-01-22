@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function AlertDialog({ tag }) {
+export default function AlertDialog({ category }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -20,14 +20,14 @@ export default function AlertDialog({ tag }) {
     const handleCloseYes = () => {
         const url = "/todos/tag/delete"
         const token = document.querySelector('meta[name="csrf-token"]').content
-        console.log(JSON.stringify(tag))
+        console.log(JSON.stringify(category))
         fetch(url, {
             method: "DELETE",
             headers: {
                 "X-CSRF-Token": token,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(tag)
+            body: JSON.stringify(category)
         })
             .then(response => {
                 if (response.ok) {

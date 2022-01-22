@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { List, ListItem, Paper } from '@mui/material'
-import PendingItems from './IndividualItems'
+import IndividualItems from './IndividualItems'
 
-const Pending = ({ pending, handleSubmit, handleDelete, all_tags }) => {
+const Pending = ({ pending, handleSubmit, handleDelete, allCategories }) => {
 
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', backgroundColor: '#D7EAE9' }}>
@@ -11,7 +11,7 @@ const Pending = ({ pending, handleSubmit, handleDelete, all_tags }) => {
                     pending.map((todo, i) => {
                         const labelId = `checkbox-list-label-${i}`
                         return (
-                            <PendingItems key={i} todo={todo} handleSubmit={handleSubmit} labelId={labelId} handleDelete={handleDelete} allTags={all_tags} />
+                            <IndividualItems key={i} todo={todo} handleSubmit={handleSubmit} labelId={labelId} handleDelete={handleDelete} allCategories={allCategories} />
                         )
                     })
                 }

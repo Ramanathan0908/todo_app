@@ -1,15 +1,12 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react';
-import { Grid, Paper, Box } from '@mui/material';
-import { createTheme, ThemeProvider, styled, Button, Stack, Typography } from '@mui/material';
-import BasicTabs from './Tabs';
-import { TextField } from '@material-ui/core';
-import { InputLabel, MenuItem, Select, SelectChangeEvent, FormControl } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
+import CategoryTabs from './Tabs';
 
 const Home = () => {
-    const [tag, setTag] = useState({ tags: [] })
+    const [allCategories, setAllCategories] = useState({ categories: [] })
 
-    const fetchTags = async () => {
+    const fetchCategories = async () => {
         const url = "/todos/all_tags"
         const res = await fetch(url)
         const data = await res.json()
@@ -19,8 +16,8 @@ const Home = () => {
 
     useEffect(() => {
         const getTodos = async () => {
-            const tagsFromServer = await fetchTags()
-            setTag(tagsFromServer)
+            const tagsFromServer = await fetchCategories()
+            setAllCategories(tagsFromServer)
         }
         getTodos()
     }, []);
@@ -37,7 +34,7 @@ const Home = () => {
                 <Typography variant="h5" gutterBottom component="div">
                     Your Todos
                 </Typography>
-                <BasicTabs tags={tag.tags} />
+                <CategoryTabs categories={allCategories.categories} />
             </Stack>
         </div >
     )

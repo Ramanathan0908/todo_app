@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {
     Button, Grid, Stack, Typography, TextField,
     InputLabel, MenuItem, Select, SelectChangeEvent,
-    FormControl, Box
+    FormControl, Box, NativeSelect
 } from '@mui/material'
 
 const UpdateTask = ({ task, allTags }) => {
@@ -108,7 +108,7 @@ const UpdateTask = ({ task, allTags }) => {
                 spacing={2}
                 sx={{ paddingTop: '1vh' }}
             >
-                <TextField sx={{ minWidth: 220 }} label="Task" id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline />
+                <TextField sx={{ minWidth: 220 }} label="Task" id='outlined-basic' autoFocus onChange={handleChange} variant="outlined" multiline defaultValue={task.title} />
                 {
                     customTag && <TextField label="Tag" id='outlined-basic' autoFocus onChange={handleTagInput} variant="outlined" sx={{ minWidth: 220 }} />
                 }

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -7,10 +6,9 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { TextField } from '@mui/material';
 import UpdateTask from './UpdateTask';
 
-const PendingItems = ({ todo, handleSubmit, labelId, handleDelete, allTags }) => {
+const IndividualItems = ({ todo, handleSubmit, labelId, handleDelete, allCategories }) => {
     const [editing, setEditing] = React.useState(false)
     const [pendingTodo, setPendingTodo] = React.useState(todo)
 
@@ -68,11 +66,11 @@ const PendingItems = ({ todo, handleSubmit, labelId, handleDelete, allTags }) =>
             </ListItem>
             {
                 editing && (
-                    <UpdateTask task={todo} allTags={allTags} />
+                    <UpdateTask task={todo} allTags={allCategories} />
                 )
             }
         </>
     )
 }
 
-export default PendingItems
+export default IndividualItems
