@@ -63,7 +63,7 @@ function CategoryTabs({ categories }) {
                     )
                 })
             }
-            <AddTask tags={categories} />
+            {/* <AddTask tags={categories} /> */}
         </Box>
     );
 }

@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function AlertDialog({ category }) {
+export default function DeleteTag({ category }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -20,7 +20,6 @@ export default function AlertDialog({ category }) {
     const handleCloseYes = () => {
         const url = "/todos/tag/delete"
         const token = document.querySelector('meta[name="csrf-token"]').content
-        console.log(JSON.stringify(category))
         fetch(url, {
             method: "DELETE",
             headers: {
@@ -44,7 +43,7 @@ export default function AlertDialog({ category }) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button color="error" variant="outlined" onClick={handleClickOpen}>
                 Delete Category
             </Button>
             <Dialog
@@ -58,8 +57,8 @@ export default function AlertDialog({ category }) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        This will delete all the tasks tagged in this category
-                        Are you sure you want to proceed
+                        This will just delete the {category.tag} tab,
+                        your tasks will still remain. Do you wish to proceed?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

@@ -106,7 +106,7 @@ const AddTask = ({ tags }) => {
             direction="column"
             justifyContent="center"
             alignItems="center"
-            sx={{ paddingTop: '3vh' }}
+            sx={{ paddingTop: '2vh' }}
         >
             {
                 !addTodo && <Button variant='contained' onClick={showAddTodo}>Add Todo</Button>

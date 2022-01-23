@@ -8,7 +8,7 @@ import {
 
 const UpdateTask = ({ task, allTags }) => {
     const [todo, setTodo] = useState(task)
-    const [inputTag, setInputTag] = useState('')
+    const [inputTag, setInputTag] = useState(task.tag)
     const [customTag, setCustomTag] = useState(false)
 
     const handleChange = (event) => {
@@ -116,22 +116,23 @@ const UpdateTask = ({ task, allTags }) => {
                     !customTag && (
                         <FormControl sx={{ minWidth: 220 }} >
                             <InputLabel id="simple-select-label">Tag</InputLabel>
-                            <Select
-                                value={inputTag}
-                                label="Tag"
-                                onChange={handleTagInput}
+                            <NativeSelect
+                                defaultValue={inputTag}
                                 fullWidth
-                                labelId="simple-select-label"
+                                inputProps={{
+                                    name: 'tag',
+                                    id: 'uncontrolled-native',
+                                }}
                             >
                                 {
                                     allTags.map((cat, i) => {
                                         return (
-                                            <MenuItem key={i} value={cat.tag}>{cat.tag}</MenuItem>
+                                            <option key={i} value={cat.tag}>{cat.tag}</option>
                                         )
                                     })
                                 }
-                                <MenuItem key={allTags.length} value="Custom-tag">Create New Tag</MenuItem>
-                            </Select>
+                                <option key={allTags.length} value="Custom-tag">Create New Tag</option>
+                            </NativeSelect>
                         </FormControl>
                     )
                 }

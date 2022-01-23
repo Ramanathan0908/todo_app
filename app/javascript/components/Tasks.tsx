@@ -2,7 +2,8 @@ import * as React from 'react'
 import { ListItem, Stack, Button } from '@mui/material'
 import Pending from './Pending'
 import Completed from './Completed'
-import AlertDialog from './DeleteTag'
+import DeleteTag from './DeleteTag'
+import AddTask from './AddTask'
 
 const Tasks = ({ category, allCategories }) => {
     const [todos, setTodos] = React.useState({ completed: [], uncompleted: [] })
@@ -99,7 +100,15 @@ const Tasks = ({ category, allCategories }) => {
             >
                 <Pending pending={todos.uncompleted} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} allCategories={allCategories} />
                 <Completed completed={todos.completed} handleSubmit={handleUpdateSubmit} handleDelete={handleDelete} allCategories={allCategories} />
-                <AlertDialog category={category} />
+                <Stack
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={5}
+                >
+                    <AddTask tags={allCategories} />
+                    <DeleteTag category={category} />
+                </Stack>
             </Stack>
         </>
     )
