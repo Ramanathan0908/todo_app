@@ -39,6 +39,7 @@
     "webpack-dev-server": "^3"
   },
   "scripts": {
-    "lint": "eslint app/javascript/**/*.ts[x]"
+    "lint": "eslint app/javascript/**/*.ts[x]",
+    "start": "rails s"
   }
 }
