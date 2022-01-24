@@ -26,7 +26,7 @@ https://tranquil-meadow-81585.herokuapp.com/
 * You can update an to-do by double clicking on it
 
 ## Acknowledgements 
-This projects design choices were inspired by CVWO's [Sample React App] (https://github.com/CVWO/sample-react-app).
+This projects design choices were inspired by CVWO's [Sample React App](https://github.com/CVWO/sample-react-app).
 This project uses [MUI](https://mui.com/), 
 [TypewriterJS](https://github.com/tameemsafi/typewriterjs#readme), 
 [ESLint](https://eslint.org/), [Prettier](https://prettier.io/).
